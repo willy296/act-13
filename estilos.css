@@ -1,0 +1,69 @@
+* { box-sizing: border-box; }
+[v-cloak] { display: none; }
+body {
+ margin: 0;
+ background: #f1f5f9;
+ color: #172033;
+ font-family: system-ui, sans-serif;
+}
+.contenedor {
+ max-width: 1040px;
+ margin: 0 auto;
+ padding: 24px;
+}
+.filtros, .catalogo {
+ display: grid;
+ gap: 16px;
+}
+.filtros {
+ grid-template-columns: 2fr 1fr 1fr;
+ align-items: end;
+}
+label { display: block; margin-bottom: 6px; font-weight: 600; }
+input, select, button {
+ width: 100%;
+ min-height: 44px;
+ padding: 8px 12px;
+ border: 1px solid #64748b;
+ border-radius: 8px;
+ font: inherit;
+}
+button { background: #174379; color: white; cursor: pointer; }
+:focus-visible { outline: 3px solid #a33c08; outline-offset: 3px; }
+/* Casilla de solo disponibles */
+.casilla {
+ display: flex;
+ align-items: center;
+ gap: 10px;
+ min-height: 44px;
+ margin-bottom: 0;
+}
+.casilla input[type="checkbox"] {
+ width: 22px;
+ min-height: 22px;
+ height: 22px;
+ margin: 0;
+ padding: 0;
+}
+.catalogo {
+ grid-template-columns: repeat(3, minmax(0, 1fr));
+ padding: 0;
+ list-style: none;
+}
+.tarjeta {
+ padding: 16px;
+ border: 1px solid #cbd5e1;
+ border-radius: 12px;
+ background: white;
+ overflow-wrap: anywhere;
+}
+.tarjeta h2 { margin: 0; font-size: 1.15rem; }
+.precio { font-weight: 700; }
+.agotado { color: #a12626; font-weight: 700; }
+@media (max-width: 760px) {
+ .filtros { grid-template-columns: 1fr; }
+ .catalogo { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 480px) {
+ .catalogo { grid-template-columns: 1fr; }
+}

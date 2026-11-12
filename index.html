@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <title>Catálogo de tecnología</title>
+ <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+ <main id="app" class="contenedor" v-cloak>
+ <h1>Catálogo de tecnología</h1>
+ <section class="filtros" aria-label="Filtros del catálogo">
+ <div>
+ <label for="busqueda">Buscar por nombre</label>
+ <input id="busqueda" type="search" v-model="busqueda"
+ placeholder="Ejemplo: teclado">
+ </div>
+ <div>
+ <label for="categoria">Categoría</label>
+ <select id="categoria" v-model="categoria">
+ <option value="">Todas</option>
+ <!-- Desafío opcional: opciones generadas desde los datos -->
+ <option v-for="cat in categorias" :key="cat" :value="cat">
+ {{ cat }}
+ </option>
+ </select>
+ </div>
+ <!-- Reto C: orden por precio -->
+ <div>
+ <label for="orden">Ordenar por precio</label>
+ <select id="orden" v-model="orden">
+ <option value="">Orden original</option>
+ <option value="asc">Menor a mayor</option>
+ <option value="desc">Mayor a menor</option>
+ </select>
+ </div>
+ <!-- Reto B: solo disponibles -->
+ <label for="disponibles" class="casilla">
+ <input id="disponibles" type="checkbox" v-model="soloDisponibles">
+ Solo disponibles
+ </label>
+ <button type="button" @click="limpiarFiltros">Limpiar filtros</button>
+ </section>
+ <p role="status">Resultados: {{ productosFiltrados.length }}</p>
+ <p v-if="productosFiltrados.length === 0">
+ No se encontraron productos. Cambia o limpia los filtros.
+ </p>
+ <ul v-else class="catalogo">
+ <li v-for="producto in productosFiltrados"
+ :key="producto.id" class="tarjeta">
+ <h2>{{ producto.nombre }}</h2>
+ <p>{{ producto.categoria }}</p>
+ <p class="precio">{{ formatearPrecio(producto.precio) }} MXN</p>
+ <p v-if="producto.stock > 0">Disponibles: {{ producto.stock }}</p>
+ <p v-else class="agotado">Agotado</p>
+ </li>
+ </ul>
+ </main>
+ <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+ <script src="app.js"></script>
+</body>
+</html>
